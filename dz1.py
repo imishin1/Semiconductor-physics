@@ -198,56 +198,76 @@ class Draw_graph(Culculation_param):
         x_list = list()
         E_list = list()
 
-        for x in np.arange (-1 * self.find_x_p_obr(temperature), 0, 1E-9):
+        for x in np.arange (-1 * self.find_x_p_obr(temperature), 0, 1E-7):
             x_list.append(x)
             E_list.append(self.find_E_p(temperature, x))
-        for x in np.arange (0, self.find_x_n_obr(temperature) , 1E-9):
+        for x in np.arange (0, self.find_x_n_obr(temperature) , 1E-7):
             x_list.append(x)
             E_list.append(self.find_E_n(temperature, x))
 
         fig, axes = plt.subplots()
 
         axes.plot(x_list, E_list, color='b', label='E(x)', linewidth=1.5)
-        #axes.set(xlim=(-1E-7, 1E-5))
+        axes.set(xlim=(-6E-6, 1E-4))
+        axes.set(ylim=(-1E4, 0))
 
-        plt.title('Распеделение электрического поля в p-n переходе')
-        plt.xlabel('х')
-        plt.ylabel('Е')
+        #plt.title('Распеделение электрического поля в p-n переходе')
+        plt.xlabel('х, см')
+        plt.ylabel('Е, В/см')
         plt.legend(loc=5)
         
+        axes.xaxis.set_major_locator(ticker.MultipleLocator(2E-5))
+        axes.xaxis.set_minor_locator(ticker.MultipleLocator(2E-5 / 5))
+        axes.yaxis.set_major_locator(ticker.MultipleLocator(2000))
+        axes.yaxis.set_minor_locator(ticker.MultipleLocator(2000 / 5))
+
+        axes.grid(which='major', color = '#666666')
+        axes.minorticks_on()
+        axes.grid(which='minor', color = 'gray', linestyle = ':')
+
+
         plt.show()
         
     def draw_potential(self, temperature):
         x_list = list()
         U_list = list()
 
-        for x in np.arange (-1 * self.find_x_p_obr(temperature), 0, 1E-7):
+        for x in np.arange (-1 * self.find_x_p(temperature), 0, 1E-7):
             x_list.append(x)
             U_list.append(self.find_U_p(temperature, x))
-        for x in np.arange (0, self.find_x_n_obr(temperature) , 1E-7):
+        for x in np.arange (0, self.find_x_n(temperature) , 1E-7):
             x_list.append(x)
             U_list.append(self.find_U_n(temperature, x))
 
         fig, axes = plt.subplots()
 
         axes.plot(x_list, U_list, color='b', label='U(x)', linewidth=1.5)
-        axes.set(xlim=(0))
+        axes.set(xlim=(0, 0.00014))
         axes.set(ylim=(0))
-        plt.title('Распеделение электрического поля в p-n переходе')
-        plt.xlabel('х')
-        plt.ylabel('U')
+        #plt.title('Распеделение потенциала в p-n переходе')
+        plt.xlabel('х, см')
+        plt.ylabel('U, В')
         plt.legend(loc=5)
         
+        axes.xaxis.set_major_locator(ticker.MultipleLocator(2E-5))
+        axes.xaxis.set_minor_locator(ticker.MultipleLocator(2E-5 / 2))
+        axes.yaxis.set_major_locator(ticker.MultipleLocator(0.1))
+        axes.yaxis.set_minor_locator(ticker.MultipleLocator(0.02))
+
+        axes.grid(which='major', color = '#666666')
+        axes.minorticks_on()
+        axes.grid(which='minor', color = 'gray', linestyle = ':')
+
         plt.show()
 
     def draw_electric_field_obr(self, temperature):
         x_list = list()
         E_list = list()
 
-        for x in np.arange (-1 * self.find_x_p_obr(temperature), 0, 1E-9):
+        for x in np.arange (-1 * self.find_x_p_obr(temperature), 0, 1E-7):
             x_list.append(x)
             E_list.append(self.find_E_p_obr(temperature, x))
-        for x in np.arange (0, self.find_x_n_obr(temperature) , 1E-9):
+        for x in np.arange (0, self.find_x_n_obr(temperature) , 1E-7):
             x_list.append(x)
             E_list.append(self.find_E_n_obr(temperature, x))
 
@@ -256,10 +276,22 @@ class Draw_graph(Culculation_param):
         axes.plot(x_list, E_list, color='b', label='E(x)', linewidth=1.5)
         #axes.set(xlim=(-1E-6, 1E-5))
 
-        plt.title('Распеделение электрического поля в p-n переходе при обратном смещении')
-        plt.xlabel('х')
-        plt.ylabel('Е')
+        #plt.title('Распеделение электрического поля в p-n переходе при обратном смещении')
+        plt.xlabel('х, см')
+        plt.ylabel('Е, В/см')
         plt.legend(loc=5)
+
+        axes.xaxis.set_major_locator(ticker.MultipleLocator(10E-5))
+        axes.xaxis.set_minor_locator(ticker.MultipleLocator(10E-5 / 5))
+        axes.yaxis.set_major_locator(ticker.MultipleLocator(5000))
+        axes.yaxis.set_minor_locator(ticker.MultipleLocator(5000 / 5))
+
+        axes.grid(which='major', color = '#666666')
+        axes.minorticks_on()
+        axes.grid(which='minor', color = 'gray', linestyle = ':')
+
+
+        plt.show()
         
         plt.show()
         
@@ -277,13 +309,24 @@ class Draw_graph(Culculation_param):
         fig, axes = plt.subplots()
 
         axes.plot(x_list, U_list, color='b', label='U(x)', linewidth=1.5)
-        axes.set(xlim=(0))
+        axes.set(xlim=(0, 39E-5))
         axes.set(ylim=(0))
-        plt.title('Распеделение электрического поля в p-n переходе при обратном смещении')
-        plt.xlabel('х')
-        plt.ylabel('U')
+        #plt.title('Распеделение потенциала в p-n переходе при обратном смещении')
+        plt.xlabel('х, см')
+        plt.ylabel('U, В')
         plt.legend(loc=5)
         
+        axes.xaxis.set_major_locator(ticker.MultipleLocator(5E-5))
+        axes.xaxis.set_minor_locator(ticker.MultipleLocator(5E-5 / 5))
+        axes.yaxis.set_major_locator(ticker.MultipleLocator(1))
+        axes.yaxis.set_minor_locator(ticker.MultipleLocator(0.2))
+
+        axes.grid(which='major', color = '#666666')
+        axes.minorticks_on()
+        axes.grid(which='minor', color = 'gray', linestyle = ':')
+
+        plt.show()
+
         plt.show()
 
     def draw_Cb(self, temperature):
@@ -296,10 +339,20 @@ class Draw_graph(Culculation_param):
         fig, axes = plt.subplots()
 
         axes.plot(Vr_list, Cb_list, color='b', label='Cb(Vr)', linewidth=1.5)
-        plt.xlabel('Vr')
-        plt.ylabel('Cb')
+        axes.set(xlim=(-10, 0))
+        plt.xlabel('Vr, В')
+        plt.ylabel('Cb, Ф')
         plt.legend(loc=6)
         
+        axes.xaxis.set_major_locator(ticker.MultipleLocator(2))
+        axes.xaxis.set_minor_locator(ticker.MultipleLocator(2 / 5))
+        axes.yaxis.set_major_locator(ticker.MultipleLocator(1E-10))
+        axes.yaxis.set_minor_locator(ticker.MultipleLocator(1E-10 / 5))
+
+        axes.grid(which='major', color = '#666666')
+        axes.minorticks_on()
+        axes.grid(which='minor', color = 'gray', linestyle = ':')
+
         plt.show()
 
     def draw_VAX_pr(self, temperature):
@@ -316,13 +369,22 @@ class Draw_graph(Culculation_param):
         fig, axes = plt.subplots()
 
         axes.plot(U_list, Ipr_list, color='b', label='Ipr(U)', linewidth=1.5)
-        axes.plot(U_list, I0_list, color='r', label='I0(U)', linewidth=1.5)
-        axes.plot(U_list, Irec_list, color='g', label='Irec(U)', linewidth=1.5)
-        axes.set(xlim=(0))
-        plt.xlabel('U')
-        plt.ylabel('I')
+        axes.plot(U_list, I0_list, color='r', label='I0(U)', linewidth=1.5, linestyle = ':')
+        axes.plot(U_list, Irec_list, color='g', label='Irec(U)', linewidth=1.5, linestyle = '--')
+        axes.set(xlim=(0, 0.39))
+        plt.xlabel('U, В')
+        plt.ylabel('I, А')
         plt.legend(loc=5)
         
+        axes.xaxis.set_major_locator(ticker.MultipleLocator(0.05))
+        axes.xaxis.set_minor_locator(ticker.MultipleLocator(0.05 / 5))
+        axes.yaxis.set_major_locator(ticker.MultipleLocator(2.5))
+        axes.yaxis.set_minor_locator(ticker.MultipleLocator(2.5 / 5))
+
+        axes.grid(which='major', color = '#666666')
+        axes.minorticks_on()
+        axes.grid(which='minor', color = 'gray', linestyle = ':')
+
         plt.show()
 
     def draw_VAX_obr(self, temperature):
@@ -338,13 +400,24 @@ class Draw_graph(Culculation_param):
 
         fig, axes = plt.subplots()
 
-        axes.plot(U_list, Iobr_list, color='b', label='Iobr(U)', linewidth=1)
-        axes.plot(U_list, I0_list, color='r', label='I0(U)', linewidth=1)
-        axes.plot(U_list, Igen_list, color='g', label='-Igen(U)', linewidth=1)
-        plt.xlabel('U')
-        plt.ylabel('I')
-        plt.legend(loc=5)
+        axes.set(xlim=(-0.4, 0.1))
+        axes.plot(U_list, Iobr_list, color='b', label='Iobr(U)', linewidth=1.5)
+        axes.plot(U_list, I0_list, color='r', label='I0(U)', linewidth=2, linestyle = ':')
+        axes.plot(U_list, Igen_list, color='g', label='-Igen(U)', linewidth=2, linestyle = '--')
+        plt.xlabel('U, В')
+        plt.ylabel('I, А')
+        plt.legend(loc=6)
         
+        axes.xaxis.set_major_locator(ticker.MultipleLocator(0.075))
+        axes.xaxis.set_minor_locator(ticker.MultipleLocator(0.075 / 5))
+        axes.yaxis.set_major_locator(ticker.MultipleLocator(0.5E-8))
+        axes.yaxis.set_minor_locator(ticker.MultipleLocator(0.5E-8 / 5))
+
+        axes.grid(which='major', color = '#666666')
+        axes.minorticks_on()
+        axes.grid(which='minor', color = 'gray', linestyle = ':')
+
+
         plt.show()
 
 def main():
@@ -378,19 +451,19 @@ def main():
     print(f'Ud={Ge.find_Ud(300)}')
     print(f'Cbar={Ge.find_Cbar(300)}')
     print(f'Cdif={Ge.find_Cdif(300)}')
+    
+    drawing = Draw_graph()
 
-    #drawing = Draw_graph()
+    drawing.draw_electric_field(300)
+    drawing.draw_potential(300)
 
-    #drawing.draw_electric_field(300)
-    #drawing.draw_potential(300)
+    drawing.draw_electric_field_obr(300)
+    drawing.draw_potential_obr(300)
 
-    #drawing.draw_electric_field_obr(300)
-    #drawing.draw_potential_obr(300)
+    drawing.draw_Cb(300)
 
-    #drawing.draw_Cb(300)
-
-    #drawing.draw_VAX_pr(300)
-    #drawing.draw_VAX_obr(300)
+    drawing.draw_VAX_pr(300)
+    drawing.draw_VAX_obr(300)
     
 if __name__ == "__main__":
     main()
